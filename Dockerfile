@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 #  sources.list
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -65,7 +65,7 @@ RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
-RUN /opt/conda/bin/pip install -y python=3.6
+RUN /opt/conda/bin/conda install -y python=3.6
 
 RUN /opt/conda/bin/pip install -y mxnet-cu100
 RUN /opt/conda/bin/pip install -y numpy --upgrade
