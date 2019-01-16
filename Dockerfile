@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.1.3"
+LABEL version="1.1.4"
 
 #  sources.list
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -55,24 +55,8 @@ RUN echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:\$CUDA_HOME/lib64:\$NVIDIA_HO
 RUN echo "export LIBRARY_PATH=\$LIBRARY_PATH:\$CUDA_HOME/lib64:\$NVIDIA_HOME/lib64" >> /etc/bash.bashrc
 # RUN apt-get -y install libcupti-dev
 
-# rdkit
-# RUN /opt/conda/bin/conda install -y -c rdkit rdkit
-
-# jupyter and other packages
-RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab
-RUN /opt/conda/bin/conda install -y -c conda-forge matplotlib
-RUN /opt/conda/bin/conda install -y -c conda-forge scikit-learn
-RUN /opt/conda/bin/conda install -y -c conda-forge scipy
-
-
-
-#  pytorch
-
-RUN /opt/conda/bin/conda install -y pytorch torchvision cuda100 -c pytorch
 
 # conda source
-RUN /opt/conda/bin/conda install -y python=3.6
-
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
 RUN /opt/conda/bin/conda config --set show_channel_urls yes
@@ -81,12 +65,15 @@ RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/bioconda/
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/menpo/
 RUN /opt/conda/bin/conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
+RUN /opt/conda/bin/pip install mxnet-cu100
+RUN /opt/conda/bin/pip install numpy --upgrade
+
+# jupyter and other packages
+RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab
+RUN /opt/conda/bin/conda install -y -c conda-forge matplotlib
+RUN /opt/conda/bin/conda install -y -c conda-forge scikit-learn
+RUN /opt/conda/bin/conda install -y -c conda-forge scipy
 RUN /opt/conda/bin/pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
-
-
-# RUN /opt/conda/bin/pip install mxnet-cu100
-
-
 
 
 
@@ -101,7 +88,12 @@ RUN echo "c.NotebookApp.notebook_dir = '/root/jupyter'" >> /root/.jupyter/jupyte
 RUN echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_notebook_config.py
 RUN echo "c.NotebookApp.token = 'woaixiaohuowa'" >> /root/.jupyter/jupyter_notebook_config.py
 
+# rdkit
+RUN /opt/conda/bin/conda install -y -c rdkit rdkit
 
+#  pytorch
+
+RUN /opt/conda/bin/conda install -y pytorch torchvision cuda100 -c pytorch
 
 
 # clean conda caches
