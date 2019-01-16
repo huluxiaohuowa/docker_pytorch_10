@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.1.2"
+LABEL version="1.1.3"
 
 #  sources.list
 RUN mv /etc/apt/sources.list /etc/apt/sources.list.bak
@@ -56,7 +56,7 @@ RUN echo "export LIBRARY_PATH=\$LIBRARY_PATH:\$CUDA_HOME/lib64:\$NVIDIA_HOME/lib
 # RUN apt-get -y install libcupti-dev
 
 # rdkit
-RUN /opt/conda/bin/conda install -y -c rdkit rdkit
+# RUN /opt/conda/bin/conda install -y -c rdkit rdkit
 
 # jupyter and other packages
 RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab
@@ -85,7 +85,6 @@ RUN /opt/conda/bin/pip config set global.index-url https://pypi.tuna.tsinghua.ed
 
 
 # RUN /opt/conda/bin/pip install mxnet-cu100
-# RUN /opt/conda/bin/pip install numpy --upgrade
 
 
 
