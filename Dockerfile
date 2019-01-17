@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.1.6"
+LABEL version="1.1.7"
 
 #  update
 RUN apt-get -y update
@@ -51,7 +51,8 @@ RUN wget --quiet https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86
 
 RUN echo "export PATH=\"\$PATH:/opt/conda/bin\"" >> /etc/bash.bashrc
 
-RUN wget --quiet http://jhu.oss-cn-qingdao.aliyuncs.com/nccl/nccl-repo-ubuntu1604-2.3.7-ga-cuda10.0_1-1_amd64.deb -O ~/nccl.deb \
+# nccl
+RUN wget --quiet https://od.lk/d/MzdfMjQzODc4N18/nccl-repo-ubuntu1604-2.3.7-ga-cuda10.0_1-1_amd64.deb -O ~/nccl.deb \
     && dpkg -i ~/nccl.deb
 
 #cuda
@@ -65,6 +66,7 @@ RUN echo "export LIBRARY_PATH=\$LIBRARY_PATH:\$CUDA_HOME/lib64:\$NVIDIA_HOME/lib
 
 
 # jupyter and other packages
+RUN /opt/conda/bin/conda install -y python=3.6
 RUN /opt/conda/bin/conda install -y -c conda-forge jupyterlab
 RUN /opt/conda/bin/conda install -y -c conda-forge matplotlib
 RUN /opt/conda/bin/conda install -y -c conda-forge scikit-learn
