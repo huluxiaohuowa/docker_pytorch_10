@@ -1,14 +1,13 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.1.5"
+LABEL version="1.1.6"
 
 #  update
 RUN apt-get -y update
 RUN apt-get -y upgrade
 
 # ssh and other softwares
-RUN apt-get install -y htop
-RUN apt-get install -y tmux
+RUN apt-get install -y htop tmux vim
 RUN apt-get install -y openssh-server
 RUN apt-get install -y checkinstall openmpi-bin openmpi-doc libopenmpi-dev
 RUN mkdir -p /var/run/sshd
@@ -72,6 +71,7 @@ RUN /opt/conda/bin/conda install -y -c conda-forge scikit-learn
 RUN /opt/conda/bin/conda install -y -c conda-forge scipy
 
 
+
 RUN mkdir -p /root/jupyter
 RUN /opt/conda/bin/jupyter lab --generate-config  --allow-root
 RUN echo "c.NotebookApp.ip = '*'" >> /root/.jupyter/jupyter_notebook_config.py
@@ -84,7 +84,7 @@ RUN echo "c.NotebookApp.allow_remote_access = True" >> /root/.jupyter/jupyter_no
 RUN echo "c.NotebookApp.token = 'woaixiaohuowa'" >> /root/.jupyter/jupyter_notebook_config.py
 
 # rdkit
-RUN /opt/conda/bin/conda install -y -c rdkit rdkit
+RUN /opt/conda/bin/conda install -y -c rdkit/label/nightly rdkit 
 
 #  deep learning
 RUN /opt/conda/bin/conda install -y pytorch torchvision cuda100 -c pytorch
