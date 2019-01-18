@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.2.4"
+LABEL version="1.2.5"
 
 #  update
 RUN apt-get -y update
@@ -8,6 +8,7 @@ RUN apt-get -y upgrade
 
 # ssh and other softwares
 RUN apt-get install -y htop tmux vim
+RUN apt-get install -y libfontconfig1 libxrender1
 RUN apt-get install -y openssh-server
 RUN apt-get install -y checkinstall openmpi-bin openmpi-doc libopenmpi-dev
 RUN mkdir -p /var/run/sshd
