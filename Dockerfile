@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.2.6"
+LABEL version="1.2.7"
 
 #  update
 RUN apt-get -y update
@@ -91,9 +91,6 @@ RUN /opt/conda/bin/conda install -y -c rdkit/label/nightly rdkit
 
 #  deep learning
 RUN /opt/conda/bin/conda install -y pytorch torchvision cuda100 -c pytorch
-# RUN /opt/conda/bin/pip install mxnet-cu100
-RUN /opt/conda/bin/pip install tf-nightly-gpu-2.0-preview
-RUN mkdir -p /root/jupyter/tensorboard
 
 
 # conda and pip source
@@ -117,7 +114,7 @@ RUN touch /entrypoint.sh
 RUN echo "#! /bin/bash" >> /entrypoint.sh
 RUN echo "/usr/sbin/sshd &" >> /entrypoint.sh
 RUN echo "/opt/conda/bin/jupyter lab --allow-root \"\$@\" &" >> /entrypoint.sh
-RUN echo "/opt/conda/bin/tensorboard --logdir=/root/jupyter/tensorboard" >> /entrypoint.sh
+# RUN echo "/opt/conda/bin/tensorboard --logdir=/root/jupyter/tensorboard" >> /entrypoint.sh
 RUN chmod 755 /entrypoint.sh
 
 EXPOSE 8888 22 6006 
