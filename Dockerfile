@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.2.3"
+LABEL version="1.2.4"
 
 #  update
 RUN apt-get -y update
@@ -74,7 +74,7 @@ RUN /opt/conda/bin/conda install -y -c conda-forge scipy
 
 
 
-RUN mkdir -p /root/jupyter/tensorboard
+# RUN mkdir -p /root/jupyter/tensorboard
 RUN /opt/conda/bin/jupyter lab --generate-config  --allow-root
 RUN echo "c.NotebookApp.ip = '*'" >> /root/.jupyter/jupyter_notebook_config.py
 # RUN echo "c.NotebookApp.password = 'sha1:fbc4098e99ca:30ee6637f61c1c23395795e64a6e405e056cc326'" >> /root/.jupyter/jupyter_notebook_config.py
