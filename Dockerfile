@@ -1,6 +1,6 @@
 FROM nvidia/cuda:10.0-cudnn7-devel-ubuntu16.04
 LABEL maintainer="4@jach.vip"
-LABEL version="1.2.8"
+LABEL version="1.3.0"
 
 #  update
 RUN apt-get -y update
@@ -29,11 +29,6 @@ RUN echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ xenial-security main 
 
 # root password
 RUN echo "root:woshiroot" | chpasswd
-
-# # libxrender
-# RUN apt-get install -y libfontconfig1 libxrender1
-
-
 
 
 # miniconda3
